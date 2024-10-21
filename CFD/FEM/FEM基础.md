@@ -23,6 +23,8 @@
 $$-\frac{d^2u}{dx^2}=f(x)$$
 
 给定$f(x)=-1$，且采用 Dirichlet 边界$u(0)=0,u(1)=0$
+此时，精确解为 $u(x) = \frac{1}{2}x^2 - \frac{1}{2}x$
+
 选取试探函数$\phi_i(x)$，可得方程弱解形式
 
 $$\int_0^1-\frac{d^2u}{dx^2}\phi_i(x)dx = \int_0^1f(x)\phi_i(x)dx$$
@@ -111,14 +113,19 @@ $$f(x)=-2$$
 $$
     K_{local} =
     \begin{bmatrix}
-    \int_{kh}^{(k+1)h}\frac{d\phi_1}{dx}\frac{d\phi_1}{dx}dx, \int_{kh}^{(k+1)h}\frac{d\phi_2}{dx}\frac{d\phi_1}{dx}dx \\
-    \int_{kh}^{(k+1)h}\frac{d\phi_1}{dx}\frac{d\phi_2}{dx}dx, \int_{kh}^{(k+1)h}\frac{d\phi_2}{dx}\frac{d\phi_2}{dx}dx
+        \int_{kh}^{(k+1)h}\frac{d\phi_1}{dx}\frac{d\phi_1}{dx}dx, \int_{kh}^{(k+1)h}\frac{d\phi_2}{dx}\frac{d\phi_1}{dx}dx \\
+        \int_{kh}^{(k+1)h}\frac{d\phi_1}{dx}\frac{d\phi_2}{dx}dx, \int_{kh}^{(k+1)h}\frac{d\phi_2}{dx}\frac{d\phi_2}{dx}dx
     \end{bmatrix}
     =
     \frac{1}{h}
     \begin{bmatrix}
-    1, -1 \\
-    -1, 1
+        1, -1 \\
+        -1, 1
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+        2, -2 \\
+        -2, 2
     \end{bmatrix}
 $$
 
@@ -135,10 +142,9 @@ $$
     1
     \end{bmatrix}
     =
-    -0.5
     \begin{bmatrix}
-    1 \\
-    1
+    -0.5 \\
+    -0.5
 \end{bmatrix}
 $$
 
@@ -146,11 +152,11 @@ $$
 将所有单元刚度矩阵和专配向量按节点所在位置叠加即可
 
 $$
-K= \frac{1}{h}
+K= 
 \begin{bmatrix}
-1, -1, 0 \\
--1, 2, -1 \\
-0, 1, -1
+2, -2, 0 \\
+-2, 4, -2 \\
+0, 2, -2
 \end{bmatrix}
 $$
 
