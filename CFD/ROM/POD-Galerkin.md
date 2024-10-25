@@ -31,14 +31,14 @@ $$
 $$
     \frac{\partial \rho}{\partial t} + (\bm u \cdot \nabla)\rho + \nabla \cdot \bm{u} = 0 \\
     \rho \left(\frac{\partial \bm u}{\partial t} + (\bm u \cdot \nabla) \bm u \right ) = -\nabla p + \nu \nabla^2\bm u \\
-    \rho\left( \frac{\partial T}{\partial t} + (\gamma - 1)T\nabla\cdot u \right) = \gamma\nu\nabla^2\bm u + \frac{\gamma\nu}{Pr}\nabla^2T
+    \rho\left( \frac{\partial T}{\partial t} + (\gamma - 1)T\nabla\cdot \bm u \right) = \nabla\cdot\bm (\rho \bm u T) + \frac{\gamma\nu}{Pr}\nabla^2T
 $$
 
 where $\bm q = (\rho, u_1, u_2, u_3, T)$, $\bm R, \bm U_i, \bm \Theta$ are the nonlinear differential operators given by
 $$
     \bm R(\bm q) = -(\bm u \cdot \nabla)\rho - \nabla \cdot \bm{u} \\
     \bm U_i(\bm q) = -\rho (\bm u \cdot \nabla) \bm u -\nabla p + \nu \nabla^2\bm u \\
-    \bm \Theta(\bm q) = -(\gamma - 1)T\nabla\cdot u + \gamma\nu\nabla^2\bm u + \frac{\gamma\nu}{Pr}\nabla^2T
+    \bm \Theta(\bm q) = -(\gamma - 1)T\nabla\cdot u + \nabla\cdot\bm (\rho \bm u T) + \frac{\gamma\nu}{Pr}\nabla^2T
 $$
 
 written more concisely as 
@@ -68,7 +68,7 @@ $$
         - p_x + \nu(u_{xx} + u_{yy} + u_{zz}) \\
         - p_y + \nu(v_{xx} + v_{yy} + v_{zz}) \\
         - p_z + \nu(w_{xx} + w_{yy} + w_{zz}) \\
-        \gamma\nu(T_{xx} + T_{yy} + T_{zz})
+        \frac{\gamma\nu}{Pr}(T_{xx} + T_{yy} + T_{zz})
     \end{bmatrix} \\ 
     \bm f_2(\bm q^1, \bm q^2) = 
     \begin{bmatrix}
@@ -84,7 +84,7 @@ $$
         -\rho^1 (u^2 u^3_x + v^2 u^3_y + w^2 u^3_z) \\
         -\rho^1 (u^2 v^3_x + v^2 v^3_y + w^2 v^3_z) \\
         -\rho^1 (u^2 w^3_x + v^2 w^3_y + w^2 w^3_z) \\
-        0
+        \rho^1_x u^2T^3 + \rho^1 u^2_x T^3 + \rho^1 u^2 T^3_x + \rho^1_y v^2T^3 + \rho^1 v^2_y T^3 + \rho^1 v^2 T^3_y + \rho^1_z w^2T^3 + \rho^1 w^2_z T^3 + \rho^1 w^2 T^3_z
     \end{bmatrix} \\
 $$
 
