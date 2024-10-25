@@ -1,6 +1,6 @@
 # POD-Galerkin Model
 
-> update 2024-10-25
+> update 2024-10-26
 
 Consider a dynamical system which evolves in a Hilbert space H, In particular, for $\bm u(t)\in \bm H$, $\bm u(t)$ satisfies
 $$
