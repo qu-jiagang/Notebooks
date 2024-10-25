@@ -114,9 +114,9 @@ $$
 
 where the details:
 $$
-    \langle\bm\phi_j, \bm f_1(\bm q)\rangle = \langle \bm\phi_j, \bm f_1(\bar{\bm q}) \rangle + \sum_l a_l \langle \bm\phi_j, \bm f_1(\bm\phi_l) \rangle \\
-    \langle\bm\phi_j, \bm f_2(\bm q, \bm q)\rangle = \langle \bm\phi_j, \bm f_2(\bar{\bm q}, \bar {\bm q}) \rangle + \sum_l a_l \langle \bm\phi_j, \bm f_2(\bar{\bm q}, \bm\phi_l) + \bm f_2(\bm\phi_l, \bar{\bm q}) \rangle + \sum_{l,m} a_la_m \langle \bm\phi_j, \bm f_2(\bm\phi_l, \bm\phi_m) \rangle \\
-    \langle\bm\phi_j, \bm f_3(\bm q, \bm q, \bm q)\rangle = \langle \bm\phi_j, \bm f_3(\bar{\bm q}, \bar {\bm q}, \bar{\bm q}) \rangle + \sum_l a_l \langle \bm\phi_j, \bm f_3(\bar{\bm q}, \bar{\bm q}, \bm\phi_l) + \bm f_3(\bar{\bm q}, \bm\phi_l, \bar{\bm q}) + \bm f_3(\bm\phi_l, \bar{\bm q}, \bar{\bm q}) \rangle + \sum_{l,m} a_la_m \langle \bm\phi_j, \bm f_3(\bar{\bm q}, \bm\phi_l, \bm\phi_m) + \bm f_3(\bm\phi_l, \bar{\bm q}, \bm\phi_m) + \bm f_3(\bm\phi_l, \bm\phi_m, \bar{\bm q}) \rangle + \sum_{l,m,n} a_la_ma_n \langle \bm\phi_j, \bm f_3(\bm\phi_l, \bm\phi_m, \bm\phi_n) \rangle
+    \langle\bm\phi_k, \bm f_1(\bm q)\rangle = \langle \bm\phi_k, \bm f_1(\bar{\bm q}) \rangle + \sum_l a_l \langle \bm\phi_k, \bm f_1(\bm\phi_l) \rangle \\
+    \langle\bm\phi_k, \bm f_2(\bm q, \bm q)\rangle = \langle \bm\phi_k, \bm f_2(\bar{\bm q}, \bar {\bm q}) \rangle + \sum_l a_l \langle \bm\phi_k, \bm f_2(\bar{\bm q}, \bm\phi_l) + \bm f_2(\bm\phi_l, \bar{\bm q}) \rangle + \sum_{l,m} a_la_m \langle \bm\phi_k, \bm f_2(\bm\phi_l, \bm\phi_m) \rangle \\
+    \langle\bm\phi_k, \bm f_3(\bm q, \bm q, \bm q)\rangle = \langle \bm\phi_k, \bm f_3(\bar{\bm q}, \bar {\bm q}, \bar{\bm q}) \rangle + \sum_l a_l \langle \bm\phi_k, \bm f_3(\bar{\bm q}, \bar{\bm q}, \bm\phi_l) + \bm f_3(\bar{\bm q}, \bm\phi_l, \bar{\bm q}) + \bm f_3(\bm\phi_l, \bar{\bm q}, \bar{\bm q}) \rangle + \sum_{l,m} a_la_m \langle \bm\phi_k, \bm f_3(\bar{\bm q}, \bm\phi_l, \bm\phi_m) + \bm f_3(\bm\phi_l, \bar{\bm q}, \bm\phi_m) + \bm f_3(\bm\phi_l, \bm\phi_m, \bar{\bm q}) \rangle + \sum_{l,m,n} a_la_ma_n \langle \bm\phi_k, \bm f_3(\bm\phi_l, \bm\phi_m, \bm\phi_n) \rangle
 $$
 
 The resulting Galerkin equations are given by
@@ -131,16 +131,16 @@ $$
 $$
 
 $$
-    L_{ik}^1 = \langle \bm\phi_i, \bm f_1(\bm\phi_k) \rangle \\
-    L_{ik}^2 = \langle \bm\phi_i, \bm f_2(\bar{\bm q}, \bm\phi_k) + \bm f_2(\bm\phi_k, \bar{\bm q}) \rangle \\
-    L_{ik}^3 = \langle \bm\phi_i, \bm f_3(\bar{\bm q}, \bar{\bm q}, \bm\phi_k) + \bm f_3(\bar{\bm q}, \bm\phi_k, \bar{\bm q}) + \bm f_3(\bm\phi_k, \bar{\bm q}, \bar{\bm q}) \rangle \\
+    L_{kl}^1 = \langle \bm\phi_k, \bm f_1(\bm\phi_l) \rangle \\
+    L_{kl}^2 = \langle \bm\phi_k, \bm f_2(\bar{\bm q}, \bm\phi_l) + \bm f_2(\bm\phi_l, \bar{\bm q}) \rangle \\
+    L_{kl}^3 = \langle \bm\phi_k, \bm f_3(\bar{\bm q}, \bar{\bm q}, \bm\phi_l) + \bm f_3(\bar{\bm q}, \bm\phi_l, \bar{\bm q}) + \bm f_3(\bm\phi_l, \bar{\bm q}, \bar{\bm q}) \rangle \\
 $$
 
 $$
-    Q_{ijk}^2 = \langle \bm\phi_i, \bm f_2(\bm\phi_j, \bm\phi_k) \rangle \\
-    Q_{ijk}^3 = \langle \bm\phi_i, \bm f_3(\bar{\bm q}, \bm\phi_j, \bm\phi_k) + \bm f_3(\bm\phi_j, \bar{\bm q}, \bm\phi_k) + \bm f_3(\bm\phi_j, \bm\phi_k, \bar{\bm q}) \rangle \\
+    Q_{klm}^2 = \langle \bm\phi_k, \bm f_2(\bm\phi_l, \bm\phi_m) \rangle \\
+    Q_{klm}^3 = \langle \bm\phi_k, \bm f_3(\bar{\bm q}, \bm\phi_l, \bm\phi_m) + \bm f_3(\bm\phi_l, \bar{\bm q}, \bm\phi_m) + \bm f_3(\bm\phi_l, \bm\phi_m, \bar{\bm q}) \rangle \\
 $$
 
 $$
-    C_{ijkl}^3 = \langle \bm\phi_i, \bm f_3(\bm\phi_j, \bm\phi_k, \bm\phi_l) \rangle
+    C_{klmn}^3 = \langle \bm\phi_k, \bm f_3(\bm\phi_l, \bm\phi_m, \bm\phi_n) \rangle
 $$
