@@ -1,6 +1,28 @@
-# Compressible 3D NS equations
+# POD-Galerkin Model
 
-## POD
+Consider a dynamical system which evolves in a Hilbert space H, In particular, for $\bm u(t)\in \bm H$, $\bm u(t)$ satisfies
+$$
+    \dot{\bm u} = \bm X(\bm u)
+$$
+
+$\bm u(t)$ can be write with Proper Orthgonal Decomposition (POD),
+$$
+    \bm u(t) = \sum_k a_k(t) \bm\phi_k
+$$
+
+Inserting this into the dynamical system, we get
+$$
+    \dot{\bm u} = \sum_k \dot{a}_k(t) \bm\phi_k = \bm X (\bm u (t))
+$$
+
+In order to get the reduced order dynamical system of $a_k(t)$, by projecting the equation into the basis $\bm \phi_k$.
+$$
+    \langle\sum_k \dot{a}_k(t) \bm\phi_k, \bm\phi_l\rangle = \langle\bm X (\bm u (t)), \bm\phi_l\rangle
+$$
+Assuming that the basis $\bm \phi_k$ are orthgonal, 
+$$
+    \dot{a}_l(t) = \langle\bm X (\bm u (t)), \bm\phi_l\rangle
+$$
 
 ## Governing Equations
 3-dimensional Navier-Stokes equations is given by
@@ -14,7 +36,7 @@ where $\bm q = (\rho, u_1, u_2, u_3, T)$, $\bm R, \bm U_i, \bm \Theta$ are the n
 $$
     \bm R(\bm q) = -(\bm u \cdot \nabla)\rho - \nabla \cdot \bm{u} \\
     \bm U_i(\bm q) = -\rho (\bm u \cdot \nabla) \bm u -\nabla p + \nu \nabla^2\bm u \\
-    \bm \Theta = -(\gamma - 1)T\nabla\cdot u + \gamma\nu\nabla^2\bm u + \frac{\gamma\nu}{Pr}\nabla^2T
+    \bm \Theta(\bm q) = -(\gamma - 1)T\nabla\cdot u + \gamma\nu\nabla^2\bm u + \frac{\gamma\nu}{Pr}\nabla^2T
 $$
 
 written more concisely as 
@@ -34,25 +56,89 @@ $$
     \bm f(\bm q) = \bm f_1(\bm q) + \bm f_2(\bm q, \bm q) + \bm f_3(\bm q, \bm q, \bm q) 
 $$
 where $\bm f_{1,2,3}$ are multilinear functions (linear in each argument).
+
+## Galerkin projection
+
 $$
-    \bm f_1 = 
+    \bm f_1(\bm q) = 
     \begin{bmatrix}
         u_x + v_y + w_z \\
         - p_x + \nu(u_{xx} + u_{yy} + u_{zz}) \\
         - p_y + \nu(v_{xx} + v_{yy} + v_{zz}) \\
         - p_z + \nu(w_{xx} + w_{yy} + w_{zz}) \\
         \gamma\nu(T_{xx} + T_{yy} + T_{zz})
-    \end{bmatrix}
+    \end{bmatrix} \\ 
+    \bm f_2(\bm q^1, \bm q^2) = 
+    \begin{bmatrix}
+        u^1\rho^2_x + v^1\rho^2_y + w^1\rho^2_z \\
+        0 \\
+        0 \\
+        0 \\
+        -(\gamma - 1)T^1(u^2_x + v^2_y + w^2_z)
+    \end{bmatrix} \\
+    \bm f_3(\bm q^1, \bm q^2, \bm q^3) = 
+    \begin{bmatrix}
+        0 \\
+        -\rho^1 (u^2 u^3_x + v^2 u^3_y + w^2 u^3_z) \\
+        -\rho^1 (u^2 v^3_x + v^2 v^3_y + w^2 v^3_z) \\
+        -\rho^1 (u^2 w^3_x + v^2 w^3_y + w^2 w^3_z) \\
+        0
+    \end{bmatrix} \\
 $$
 
-
-## Galerkin projection
 let $\bm \phi_k$ be a basis for the function space containing $\bm q$, 
 $$
-    \bm q(t) = \sum_k a_k(t)\bm\phi_k
+    \bm q(x, t) = \bar{\bm q}(x) + \sum_k a_k(t)\bm\phi_k
 $$
 Inserting this expression into the governing equation,
 $$
-    \left[\bm B + \bm L\left( \sum_l a_l\bm\phi_l\right)\right]\sum_k\dot{a}_k\bm\phi_k = \bm f (\bm q)
+    \left[\bm B + \bm L\left( \sum_l a_l\bm\phi_l\right)\right] \sum_k\dot{a}_k\bm\phi_k = \bm f (\bm q)
 $$
 
+Taking an inner product with $\bm\phi_j$ then gives
+$$
+    \sum_k \dot{a}_k\left( \langle\bm\phi_j, \bm B\phi_k\rangle + \sum_l a_l \langle\bm\phi_j, \bm L(\bm\phi_l)\phi_k\rangle \right) = \langle\bm\phi_j, \bm f(\bm q)\rangle
+$$
+
+The equation above can be written in matrix form as
+$$
+    \bm M (\bm a) \dot{\bm a} = \bm F (\bm a)
+$$
+where $\bm a = (a_1, a_2, ..., a_n)$, and
+$$
+    M_{jk} = \langle \bm\phi_j, \bm B\phi_k \rangle + \sum_l a_l \langle\bm\phi_j, \bm L(\bm\phi_l)\phi_k\rangle \\
+    F_j = \langle\bm\phi_j, \bm f(\bm q)\rangle = \sum_l a_l \langle\bm\phi_j, \bm f_1(\bm q)\rangle + \sum_{l, m}a_la_m\langle\bm\phi_j, \bm f_2(\bm\phi_l, \bm\phi_m)\rangle + \sum_{l, m, n}a_la_ma_n\langle\bm\phi_j, \bm f_3(\bm\phi_l, \bm\phi_m, \bm\phi_n)\rangle
+$$
+
+where the details:
+$$
+    \langle\bm\phi_j, \bm f_1(\bm q)\rangle = \langle \bm\phi_j, \bm f_1(\bar{\bm q}) \rangle + \sum_l a_l \langle \bm\phi_j, \bm f_1(\bm\phi_l) \rangle \\
+    \langle\bm\phi_j, \bm f_2(\bm q, \bm q)\rangle = \langle \bm\phi_j, \bm f_2(\bar{\bm q}, \bar {\bm q}) \rangle + \sum_l a_l \langle \bm\phi_j, \bm f_2(\bar{\bm q}, \bm\phi_l) + \bm f_2(\bm\phi_l, \bar{\bm q}) \rangle + \sum_{l,m} a_la_m \langle \bm\phi_j, \bm f_2(\bm\phi_l, \bm\phi_m) \rangle \\
+    \langle\bm\phi_j, \bm f_3(\bm q, \bm q, \bm q)\rangle = \langle \bm\phi_j, \bm f_3(\bar{\bm q}, \bar {\bm q}, \bar{\bm q}) \rangle + \sum_l a_l \langle \bm\phi_j, \bm f_3(\bar{\bm q}, \bar{\bm q}, \bm\phi_l) + \bm f_3(\bar{\bm q}, \bm\phi_l, \bar{\bm q}) + \bm f_3(\bm\phi_l, \bar{\bm q}, \bar{\bm q}) \rangle + \sum_{l,m} a_la_m \langle \bm\phi_j, \bm f_3(\bar{\bm q}, \bm\phi_l, \bm\phi_m) + \bm f_3(\bm\phi_l, \bar{\bm q}, \bm\phi_m) + \bm f_3(\bm\phi_l, \bm\phi_m, \bar{\bm q}) \rangle + \sum_{l,m,n} a_la_ma_n \langle \bm\phi_j, \bm f_3(\bm\phi_l, \bm\phi_m, \bm\phi_n) \rangle
+$$
+
+The resulting Galerkin equations are given by
+$$
+    \dot{\bm a} = b_k^1+ b_k^2 + b_k^3 + \sum_l L_{kl}^1 a_l + \sum_{l,m} L_{kl}^2 a_la_m + \sum_{l,m,n} L_{kl}^3 a_la_ma_n \\
+$$
+
+$$
+    b_k^1 = \langle \bm\phi_k, \bm f_1(\bar{\bm q}) \rangle \\
+    b_k^2 = \langle \bm\phi_k, \bm f_2(\bar{\bm q}, \bar{\bm q}) \rangle \\
+    b_k^3 = \langle \bm\phi_k, \bm f_3(\bar{\bm q}, \bar{\bm q}, \bar{\bm q}) \rangle \\
+$$
+
+$$
+    L_{ik}^1 = \langle \bm\phi_i, \bm f_1(\bm\phi_k) \rangle \\
+    L_{ik}^2 = \langle \bm\phi_i, \bm f_2(\bar{\bm q}, \bm\phi_k) + \bm f_2(\bm\phi_k, \bar{\bm q}) \rangle \\
+    L_{ik}^3 = \langle \bm\phi_i, \bm f_3(\bar{\bm q}, \bar{\bm q}, \bm\phi_k) + \bm f_3(\bar{\bm q}, \bm\phi_k, \bar{\bm q}) + \bm f_3(\bm\phi_k, \bar{\bm q}, \bar{\bm q}) \rangle \\
+$$
+
+$$
+    Q_{ijk}^2 = \langle \bm\phi_i, \bm f_2(\bm\phi_j, \bm\phi_k) \rangle \\
+    Q_{ijk}^3 = \langle \bm\phi_i, \bm f_3(\bar{\bm q}, \bm\phi_j, \bm\phi_k) + \bm f_3(\bm\phi_j, \bar{\bm q}, \bm\phi_k) + \bm f_3(\bm\phi_j, \bm\phi_k, \bar{\bm q}) \rangle \\
+$$
+
+$$
+    C_{ijkl}^3 = \langle \bm\phi_i, \bm f_3(\bm\phi_j, \bm\phi_k, \bm\phi_l) \rangle
+$$
