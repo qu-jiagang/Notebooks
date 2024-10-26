@@ -108,8 +108,12 @@ $$
 $$
 where $\bm a = (a_1, a_2, ..., a_n)$, and
 $$
-    M_{jk} = \langle \bm\phi_j, \bm B\phi_k \rangle + \sum_l a_l \langle\bm\phi_j, \bm L(\bm\phi_l)\phi_k\rangle \\
-    F_j = \langle\bm\phi_j, \bm f(\bm q)\rangle = \sum_l a_l \langle\bm\phi_j, \bm f_1(\bm q)\rangle + \sum_{l, m}a_la_m\langle\bm\phi_j, \bm f_2(\bm\phi_l, \bm\phi_m)\rangle + \sum_{l, m, n}a_la_ma_n\langle\bm\phi_j, \bm f_3(\bm\phi_l, \bm\phi_m, \bm\phi_n)\rangle
+    M_{kl} = \langle \bm\phi_k, \bm B\phi_l \rangle + 
+    \sum_l a_l \langle\bm\phi_k, \bm L(\bm\phi_l)\phi_k\rangle \\
+    F_k = \langle\bm\phi_k, \bm f(\bm q)\rangle = 
+    \sum_l a_l \langle\bm\phi_k, \bm f_1(\bm q)\rangle + 
+    \sum_{l, m}a_la_m\langle\bm\phi_k, \bm f_2(\bm\phi_l, \bm\phi_m)\rangle + 
+    \sum_{l, m, n}a_la_ma_n\langle\bm\phi_k, \bm f_3(\bm\phi_l, \bm\phi_m, \bm\phi_n)\rangle
 $$
 
 where the details:
@@ -121,7 +125,10 @@ $$
 
 The resulting Galerkin equations are given by
 $$
-    \dot{\bm a} = b_k^1+ b_k^2 + b_k^3 + \sum_l L_{kl}^1 a_l + \sum_{l,m} L_{kl}^2 a_la_m + \sum_{l,m,n} L_{kl}^3 a_la_ma_n \\
+    \dot{a}_k = b_k^1+ b_k^2 + b_k^3 + 
+    \sum_l a_l (L_{kl}^1 + L_{kl}^2 + L_{kl}^3) + 
+    \sum_{l,m} (a_la_m Q_{klm}^2 + a_la_m Q_{klm}^3) + 
+    \sum_{l,m,n} a_la_ma_n C_{klmn}^3 
 $$
 
 $$
