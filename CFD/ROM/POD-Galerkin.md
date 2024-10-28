@@ -3,31 +3,38 @@
 > update 2024-10-26
 
 Consider a dynamical system which evolves in a Hilbert space H, In particular, for $\bm u(t)\in \bm H$, $\bm u(t)$ satisfies
+
 $$
     \dot{\bm u} = \bm X(\bm u)
 $$
 
 $\bm u(t)$ can be write with Proper Orthgonal Decomposition (POD),
+
 $$
     \bm u(t) = \sum_k a_k(t) \bm\phi_k
 $$
 
 Inserting this into the dynamical system, we get
+
 $$
     \dot{\bm u} = \sum_k \dot{a}_k(t) \bm\phi_k = \bm X (\bm u (t))
 $$
 
 In order to get the reduced order dynamical system of $a_k(t)$, by projecting the equation into the basis $\bm \phi_k$.
+
 $$
     \langle\sum_k \dot{a}_k(t) \bm\phi_k, \bm\phi_l\rangle = \langle\bm X (\bm u (t)), \bm\phi_l\rangle
 $$
+
 Assuming that the basis $\bm \phi_k$ are orthgonal, 
+
 $$
     \dot{a}_l(t) = \langle\bm X (\bm u (t)), \bm\phi_l\rangle
 $$
 
 ## Governing Equations
 3-dimensional Navier-Stokes equations is given by
+
 $$
     \frac{\partial \rho}{\partial t} + (\bm u \cdot \nabla)\rho + \nabla \cdot \bm{u} = 0 \\
     \rho \left(\frac{\partial \bm u}{\partial t} + (\bm u \cdot \nabla) \bm u \right ) = -\nabla p + \nu \nabla^2\bm u \\
@@ -35,6 +42,7 @@ $$
 $$
 
 These equations are written in the form:
+
 $$
     \frac{\partial \rho}{\partial t} = R(\bm q) , \quad
     \rho \frac{\partial u_i}{\partial t} = \bm U_1(\bm q) , \quad
@@ -42,6 +50,7 @@ $$
 $$
 
 where $\bm q = (\rho, u_1, u_2, u_3, T)$, $\bm R, \bm U_i, \bm \Theta$ are the nonlinear differential operators given by
+
 $$
     \bm R(\bm q) = -(\bm u \cdot \nabla)\rho - \nabla \cdot \bm{u} \\
     \bm U_i(\bm q) = -\rho (\bm u \cdot \nabla) \bm u -\nabla p + \nu \nabla^2\bm u \\
@@ -49,6 +58,7 @@ $$
 $$
 
 written more concisely as 
+
 $$
     \bm A (\bm q)\dot{\bm q} = \bm f(\bm q)
 $$
@@ -56,14 +66,17 @@ $$
 where $\bm A = diag(1, \rho, \rho, \rho, \rho)$, $\bm f (\bm q) = (\bm R(\bm q), \bm U_1(\bm q), \bm U_2(\bm q), \bm U_3(\bm q), \bm \Theta(\bm q))$, 
 
 $\bm A$ is affine in $\bm q$, and may be written 
+
 $$
     \bm A (\bm q) = \bm B + \bm L (\bm q) = diag(1, 0, 0, 0, 0) + diag(0, \rho, \rho, \rho, \rho)
 $$
 
 Furthermore, $\bm f$ is cubic and may be written
+
 $$
     \bm f(\bm q) = \bm f_1(\bm q) + \bm f_2(\bm q, \bm q) + \bm f_3(\bm q, \bm q, \bm q) 
 $$
+
 where $\bm f_{1,2,3}$ are multilinear functions (linear in each argument).
 
 ## Galerkin projection
@@ -96,24 +109,31 @@ $$
 $$
 
 let $\bm \phi_k$ be a basis for the function space containing $\bm q$, 
+
 $$
     \bm q(x, t) = \bar{\bm q}(x) + \sum_k a_k(t)\bm\phi_k
 $$
+
 Inserting this expression into the governing equation,
+
 $$
     \left[\bm B + \bm L\left( \sum_l a_l\bm\phi_l\right)\right] \sum_k\dot{a}_k\bm\phi_k = \bm f (\bm q)
 $$
 
 Taking an inner product with $\bm\phi_j$ then gives
+
 $$
     \sum_k \dot{a}_k\left( \langle\bm\phi_j, \bm B\phi_k\rangle + \sum_l a_l \langle\bm\phi_j, \bm L(\bm\phi_l)\phi_k\rangle \right) = \langle\bm\phi_j, \bm f(\bm q)\rangle
 $$
 
 The equation above can be written in matrix form as
+
 $$
     \bm M (\bm a) \dot{\bm a} = \bm F (\bm a)
 $$
+
 where $\bm a = (a_1, a_2, ..., a_n)$, and
+
 $$
     M_{kl} = \langle \bm\phi_k, \bm B\phi_l \rangle + 
     \sum_l a_l \langle\bm\phi_k, \bm L(\bm\phi_l)\phi_k\rangle \\
@@ -124,6 +144,7 @@ $$
 $$
 
 where the details:
+
 $$
     \langle\bm\phi_k, \bm f_1(\bm q)\rangle = \langle \bm\phi_k, \bm f_1(\bar{\bm q}) \rangle + \sum_l a_l \langle \bm\phi_k, \bm f_1(\bm\phi_l) \rangle \\
     \langle\bm\phi_k, \bm f_2(\bm q, \bm q)\rangle = \langle \bm\phi_k, \bm f_2(\bar{\bm q}, \bar {\bm q}) \rangle + \sum_l a_l \langle \bm\phi_k, \bm f_2(\bar{\bm q}, \bm\phi_l) + \bm f_2(\bm\phi_l, \bar{\bm q}) \rangle + \sum_{l,m} a_la_m \langle \bm\phi_k, \bm f_2(\bm\phi_l, \bm\phi_m) \rangle \\
@@ -131,6 +152,7 @@ $$
 $$
 
 The resulting Galerkin equations are given by
+
 $$
     \dot{a}_k = b_k^1+ b_k^2 + b_k^3 + 
     \sum_l a_l (L_{kl}^1 + L_{kl}^2 + L_{kl}^3) + 
