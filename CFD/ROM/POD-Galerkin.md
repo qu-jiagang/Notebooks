@@ -34,11 +34,18 @@ $$
     \rho\left( \frac{\partial T}{\partial t} + (\gamma - 1)T\nabla\cdot \bm u \right) = \nabla\cdot\bm (\rho \bm u T) + \frac{\gamma\nu}{Pr}\nabla^2T
 $$
 
+These equations are written in the form:
+$$
+    \frac{\partial \rho}{\partial t} = R(\bm q) , \quad
+    \rho \frac{\partial u_i}{\partial t} = \bm U_1(\bm q) , \quad
+    \rho \frac{\partial T}{\partial t} = \Theta(\bm q)
+$$
+
 where $\bm q = (\rho, u_1, u_2, u_3, T)$, $\bm R, \bm U_i, \bm \Theta$ are the nonlinear differential operators given by
 $$
     \bm R(\bm q) = -(\bm u \cdot \nabla)\rho - \nabla \cdot \bm{u} \\
     \bm U_i(\bm q) = -\rho (\bm u \cdot \nabla) \bm u -\nabla p + \nu \nabla^2\bm u \\
-    \bm \Theta(\bm q) = -(\gamma - 1)T\nabla\cdot u + \nabla\cdot\bm (\rho \bm u T) + \frac{\gamma\nu}{Pr}\nabla^2T
+    \bm \Theta(\bm q) = -(\gamma - 1)\rho T\nabla\cdot u + \nabla\cdot\bm (\rho \bm u T) + \frac{\gamma\nu}{Pr}\nabla^2T
 $$
 
 written more concisely as 
@@ -76,7 +83,7 @@ $$
         0 \\
         0 \\
         0 \\
-        -(\gamma - 1)T^1(u^2_x + v^2_y + w^2_z)
+        0
     \end{bmatrix} \\
     \bm f_3(\bm q^1, \bm q^2, \bm q^3) = 
     \begin{bmatrix}
@@ -84,7 +91,7 @@ $$
         -\rho^1 (u^2 u^3_x + v^2 u^3_y + w^2 u^3_z) \\
         -\rho^1 (u^2 v^3_x + v^2 v^3_y + w^2 v^3_z) \\
         -\rho^1 (u^2 w^3_x + v^2 w^3_y + w^2 w^3_z) \\
-        \rho^1_x u^2T^3 + \rho^1 u^2_x T^3 + \rho^1 u^2 T^3_x + \rho^1_y v^2T^3 + \rho^1 v^2_y T^3 + \rho^1 v^2 T^3_y + \rho^1_z w^2T^3 + \rho^1 w^2_z T^3 + \rho^1 w^2 T^3_z
+        -(\gamma - 1)\rho^1T^2(u^3_x + v^3_y + w^3_z) + \rho^1_x u^2T^3 + \rho^1 u^2_x T^3 + \rho^1 u^2 T^3_x + \rho^1_y v^2T^3 + \rho^1 v^2_y T^3 + \rho^1 v^2 T^3_y + \rho^1_z w^2T^3 + \rho^1 w^2_z T^3 + \rho^1 w^2 T^3_z
     \end{bmatrix} \\
 $$
 
