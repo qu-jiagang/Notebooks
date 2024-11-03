@@ -4,7 +4,7 @@
 ### 以连续性方程为例
 
 $$
-\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \bm u) = 0
+\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \boldsymbol u) = 0
 $$
 
 这里先只考虑一维情况，且速度为常数$a$， 也就是
