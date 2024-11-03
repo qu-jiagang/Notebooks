@@ -36,8 +36,14 @@ $$
 3-dimensional Navier-Stokes equations is given by
 
 $$
-    \frac{\partial \rho}{\partial t} + (\boldsymbol u \cdot \nabla)\rho + \nabla \cdot \boldsymbol{u} = 0 \\
-    \rho \left(\frac{\partial \boldsymbol u}{\partial t} + (\boldsymbol u \cdot \nabla) \boldsymbol u \right ) = -\nabla p + \nu \nabla^2\boldsymbol u \\
+    \frac{\partial \rho}{\partial t} + (\boldsymbol u \cdot \nabla)\rho + \nabla \cdot \boldsymbol{u} = 0
+$$
+
+$$
+    \rho \left(\frac{\partial \boldsymbol u}{\partial t} + (\boldsymbol u \cdot \nabla) \boldsymbol u \right ) = -\nabla p + \nu \nabla^2\boldsymbol u
+$$
+
+$$
     \rho\left( \frac{\partial T}{\partial t} + (\gamma - 1)T\nabla\cdot \boldsymbol u \right) = \nabla\cdot\boldsymbol (\rho \boldsymbol u T) + \frac{\gamma\nu}{Pr}\nabla^2T
 $$
 
@@ -52,8 +58,14 @@ $$
 where $\boldsymbol q = (\rho, u_1, u_2, u_3, T)$, $\boldsymbol R, \boldsymbol U_i, \boldsymbol \Theta$ are the nonlinear differential operators given by
 
 $$
-    \boldsymbol R(\boldsymbol q) = -(\boldsymbol u \cdot \nabla)\rho - \nabla \cdot \boldsymbol{u} \\
-    \boldsymbol U_i(\boldsymbol q) = -\rho (\boldsymbol u \cdot \nabla) \boldsymbol u -\nabla p + \nu \nabla^2\boldsymbol u \\
+    \boldsymbol R(\boldsymbol q) = -(\boldsymbol u \cdot \nabla)\rho - \nabla \cdot \boldsymbol{u}
+$$
+
+$$
+    \boldsymbol U_i(\boldsymbol q) = -\rho (\boldsymbol u \cdot \nabla) \boldsymbol u -\nabla p + \nu \nabla^2\boldsymbol u
+$$
+
+$$
     \boldsymbol \Theta(\boldsymbol q) = -(\gamma - 1)\rho T\nabla\cdot u + \nabla\cdot\boldsymbol (\rho \boldsymbol u T) + \frac{\gamma\nu}{Pr}\nabla^2T
 $$
 
@@ -111,7 +123,7 @@ $$
         -\rho^1 (u^2 v^3_x + v^2 v^3_y + w^2 v^3_z) \\
         -\rho^1 (u^2 w^3_x + v^2 w^3_y + w^2 w^3_z) \\
         -(\gamma - 1)\rho^1T^2(u^3_x + v^3_y + w^3_z) + \rho^1_x u^2T^3 + \rho^1 u^2_x T^3 + \rho^1 u^2 T^3_x + \rho^1_y v^2T^3 + \rho^1 v^2_y T^3 + \rho^1 v^2 T^3_y + \rho^1_z w^2T^3 + \rho^1 w^2_z T^3 + \rho^1 w^2 T^3_z
-    \end{bmatrix} \\
+    \end{bmatrix}
 $$
 
 let $\boldsymbol \phi_k$ be a basis for the function space containing $\boldsymbol q$, 
@@ -142,7 +154,10 @@ where $\boldsymbol a = (a_1, a_2, ..., a_n)$, and
 
 $$
     M_{kl} = \langle \boldsymbol\phi_k, \boldsymbol B\phi_l \rangle + 
-    \sum_l a_l \langle\boldsymbol\phi_k, \boldsymbol L(\boldsymbol\phi_l)\phi_k\rangle \\
+    \sum_l a_l \langle\boldsymbol\phi_k, \boldsymbol L(\boldsymbol\phi_l)\phi_k\rangle
+$$
+
+$$
     F_k = \langle\boldsymbol\phi_k, \boldsymbol f(\boldsymbol q)\rangle = 
     \sum_l a_l \langle\boldsymbol\phi_k, \boldsymbol f_1(\boldsymbol q)\rangle + 
     \sum_{l, m}a_la_m\langle\boldsymbol\phi_k, \boldsymbol f_2(\boldsymbol\phi_l, \boldsymbol\phi_m)\rangle + 
@@ -152,8 +167,14 @@ $$
 where the details:
 
 $$
-    \langle\boldsymbol\phi_k, \boldsymbol f_1(\boldsymbol q)\rangle = \langle \boldsymbol\phi_k, \boldsymbol f_1(\bar{\boldsymbol q}) \rangle + \sum_l a_l \langle \boldsymbol\phi_k, \boldsymbol f_1(\boldsymbol\phi_l) \rangle \\
-    \langle\boldsymbol\phi_k, \boldsymbol f_2(\boldsymbol q, \boldsymbol q)\rangle = \langle \boldsymbol\phi_k, \boldsymbol f_2(\bar{\boldsymbol q}, \bar {\boldsymbol q}) \rangle + \sum_l a_l \langle \boldsymbol\phi_k, \boldsymbol f_2(\bar{\boldsymbol q}, \boldsymbol\phi_l) + \boldsymbol f_2(\boldsymbol\phi_l, \bar{\boldsymbol q}) \rangle + \sum_{l,m} a_la_m \langle \boldsymbol\phi_k, \boldsymbol f_2(\boldsymbol\phi_l, \boldsymbol\phi_m) \rangle \\
+    \langle\boldsymbol\phi_k, \boldsymbol f_1(\boldsymbol q)\rangle = \langle \boldsymbol\phi_k, \boldsymbol f_1(\bar{\boldsymbol q}) \rangle + \sum_l a_l \langle \boldsymbol\phi_k, \boldsymbol f_1(\boldsymbol\phi_l) \rangle 
+$$
+
+$$
+    \langle\boldsymbol\phi_k, \boldsymbol f_2(\boldsymbol q, \boldsymbol q)\rangle = \langle \boldsymbol\phi_k, \boldsymbol f_2(\bar{\boldsymbol q}, \bar {\boldsymbol q}) \rangle + \sum_l a_l \langle \boldsymbol\phi_k, \boldsymbol f_2(\bar{\boldsymbol q}, \boldsymbol\phi_l) + \boldsymbol f_2(\boldsymbol\phi_l, \bar{\boldsymbol q}) \rangle + \sum_{l,m} a_la_m \langle \boldsymbol\phi_k, \boldsymbol f_2(\boldsymbol\phi_l, \boldsymbol\phi_m) \rangle 
+$$
+
+$$
     \langle\boldsymbol\phi_k, \boldsymbol f_3(\boldsymbol q, \boldsymbol q, \boldsymbol q)\rangle = \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \bar {\boldsymbol q}, \bar{\boldsymbol q}) \rangle + \sum_l a_l \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \bar{\boldsymbol q}, \boldsymbol\phi_l) + \boldsymbol f_3(\bar{\boldsymbol q}, \boldsymbol\phi_l, \bar{\boldsymbol q}) + \boldsymbol f_3(\boldsymbol\phi_l, \bar{\boldsymbol q}, \bar{\boldsymbol q}) \rangle + \sum_{l,m} a_la_m \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \boldsymbol\phi_l, \boldsymbol\phi_m) + \boldsymbol f_3(\boldsymbol\phi_l, \bar{\boldsymbol q}, \boldsymbol\phi_m) + \boldsymbol f_3(\boldsymbol\phi_l, \boldsymbol\phi_m, \bar{\boldsymbol q}) \rangle + \sum_{l,m,n} a_la_ma_n \langle \boldsymbol\phi_k, \boldsymbol f_3(\boldsymbol\phi_l, \boldsymbol\phi_m, \boldsymbol\phi_n) \rangle
 $$
 
@@ -164,20 +185,35 @@ $$
 $$
 
 $$
-    b_k^1 = \langle \boldsymbol\phi_k, \boldsymbol f_1(\bar{\boldsymbol q}) \rangle \\
-    b_k^2 = \langle \boldsymbol\phi_k, \boldsymbol f_2(\bar{\boldsymbol q}, \bar{\boldsymbol q}) \rangle \\
-    b_k^3 = \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \bar{\boldsymbol q}, \bar{\boldsymbol q}) \rangle \\
+    b_k^1 = \langle \boldsymbol\phi_k, \boldsymbol f_1(\bar{\boldsymbol q}) \rangle 
 $$
 
 $$
-    L_{kl}^1 = \langle \boldsymbol\phi_k, \boldsymbol f_1(\boldsymbol\phi_l) \rangle \\
-    L_{kl}^2 = \langle \boldsymbol\phi_k, \boldsymbol f_2(\bar{\boldsymbol q}, \boldsymbol\phi_l) + \boldsymbol f_2(\boldsymbol\phi_l, \bar{\boldsymbol q}) \rangle \\
-    L_{kl}^3 = \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \bar{\boldsymbol q}, \boldsymbol\phi_l) + \boldsymbol f_3(\bar{\boldsymbol q}, \boldsymbol\phi_l, \bar{\boldsymbol q}) + \boldsymbol f_3(\boldsymbol\phi_l, \bar{\boldsymbol q}, \bar{\boldsymbol q}) \rangle \\
+    b_k^2 = \langle \boldsymbol\phi_k, \boldsymbol f_2(\bar{\boldsymbol q}, \bar{\boldsymbol q}) \rangle 
 $$
 
 $$
-    Q_{klm}^2 = \langle \boldsymbol\phi_k, \boldsymbol f_2(\boldsymbol\phi_l, \boldsymbol\phi_m) \rangle \\
-    Q_{klm}^3 = \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \boldsymbol\phi_l, \boldsymbol\phi_m) + \boldsymbol f_3(\boldsymbol\phi_l, \bar{\boldsymbol q}, \boldsymbol\phi_m) + \boldsymbol f_3(\boldsymbol\phi_l, \boldsymbol\phi_m, \bar{\boldsymbol q}) \rangle \\
+    b_k^3 = \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \bar{\boldsymbol q}, \bar{\boldsymbol q}) \rangle
+$$
+
+$$
+    L_{kl}^1 = \langle \boldsymbol\phi_k, \boldsymbol f_1(\boldsymbol\phi_l) \rangle
+$$
+
+$$
+    L_{kl}^2 = \langle \boldsymbol\phi_k, \boldsymbol f_2(\bar{\boldsymbol q}, \boldsymbol\phi_l) + \boldsymbol f_2(\boldsymbol\phi_l, \bar{\boldsymbol q}) \rangle
+$$
+
+$$
+    L_{kl}^3 = \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \bar{\boldsymbol q}, \boldsymbol\phi_l) + \boldsymbol f_3(\bar{\boldsymbol q}, \boldsymbol\phi_l, \bar{\boldsymbol q}) + \boldsymbol f_3(\boldsymbol\phi_l, \bar{\boldsymbol q}, \bar{\boldsymbol q}) \rangle
+$$
+
+$$
+    Q_{klm}^2 = \langle \boldsymbol\phi_k, \boldsymbol f_2(\boldsymbol\phi_l, \boldsymbol\phi_m) \rangle
+$$
+
+$$
+    Q_{klm}^3 = \langle \boldsymbol\phi_k, \boldsymbol f_3(\bar{\boldsymbol q}, \boldsymbol\phi_l, \boldsymbol\phi_m) + \boldsymbol f_3(\boldsymbol\phi_l, \bar{\boldsymbol q}, \boldsymbol\phi_m) + \boldsymbol f_3(\boldsymbol\phi_l, \boldsymbol\phi_m, \bar{\boldsymbol q}) \rangle
 $$
 
 $$
