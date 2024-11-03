@@ -89,7 +89,10 @@ $$
         - p_y + \nu(v_{xx} + v_{yy} + v_{zz}) \\
         - p_z + \nu(w_{xx} + w_{yy} + w_{zz}) \\
         \frac{\gamma\nu}{Pr}(T_{xx} + T_{yy} + T_{zz})
-    \end{bmatrix} \\ 
+    \end{bmatrix}
+$$
+
+$$
     \boldsymbol f_2(\boldsymbol q^1, \boldsymbol q^2) = 
     \begin{bmatrix}
         u^1\rho^2_x + v^1\rho^2_y + w^1\rho^2_z \\
@@ -97,7 +100,10 @@ $$
         0 \\
         0 \\
         0
-    \end{bmatrix} \\
+    \end{bmatrix}
+$$
+
+$$
     \boldsymbol f_3(\boldsymbol q^1, \boldsymbol q^2, \boldsymbol q^3) = 
     \begin{bmatrix}
         0 \\
@@ -154,10 +160,7 @@ $$
 The resulting Galerkin equations are given by
 
 $$
-    \dot{a}_k = b_k^1+ b_k^2 + b_k^3 + 
-    \sum_l a_l (L_{kl}^1 + L_{kl}^2 + L_{kl}^3) + 
-    \sum_{l,m} (a_la_m Q_{klm}^2 + a_la_m Q_{klm}^3) + 
-    \sum_{l,m,n} a_la_ma_n C_{klmn}^3 
+    \dot{a}_k = b_k^1+ b_k^2 + b_k^3 + \sum_l a_l (L_{kl}^1 + L_{kl}^2 + L_{kl}^3) + \sum_{l,m} (a_la_m Q_{klm}^2 + a_la_m Q_{klm}^3) + \sum_{l,m,n} a_la_ma_n C_{klmn}^3 
 $$
 
 $$
